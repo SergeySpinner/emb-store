@@ -14,6 +14,22 @@ public class Product extends BaseEntity{
         this.prodInfo = prodInfo;
     }
 
+    public Integer getProdQuantity() {
+        return prodQuantity;
+    }
+
+    public void setProdQuantity(Integer prodQuantity) {
+        this.prodQuantity = prodQuantity;
+    }
+
+    public String getProdInfo() {
+        return prodInfo;
+    }
+
+    public void setProdInfo(String prodInfo) {
+        this.prodInfo = prodInfo;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -28,5 +44,13 @@ public class Product extends BaseEntity{
 
     public Integer getPrice() {
         return price;
+    }
+
+    public String toString(){
+        return "{Product:id=" + getId() +
+                ",prodName=" + getName() +
+                ",price=" + getPrice() +
+                ",prodQuantity=" + getProdQuantity() +
+                ",prodInfo=" + getProdInfo() + '}';
     }
 }
