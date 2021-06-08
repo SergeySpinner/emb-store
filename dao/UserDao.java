@@ -16,16 +16,6 @@ public class UserDao {
     private static final String INSERT_SQL = "insert into \"User\"(" + USER_FIELD + ") values(?,?,?,?,?)";
     private static final String DELETE_SQL = "delete from \"User\" where id = ?";
 
-//    public static void main(String[] args) throws DaoException {
-//        UserDao userDao = new UserDao();
-//        User user = new User(null,"Ben", UserRole.MANUFACTURER.toString(),"gmail@gmail.com","1","1");
-//        User user1 = new User(null, "Kevin", UserRole.ADMIN.toString(),"gmail@gmail.com","2","1");
-//        List<User> users = userDao.findAll();
-//        for(User f: users)
-//            System.out.println(f.toString());
-//
-//    }
-
     public Integer create(User user) throws DaoException {
         try(Connection connection = PostgresUtils.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SQL,Statement.RETURN_GENERATED_KEYS)){
@@ -73,12 +63,12 @@ public class UserDao {
         ){
             while(resultSet.next()){
                 User user = new User(
-                        resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getString(6)
+                        resultSet.getInt("id"),
+                        resultSet.getString("username"),
+                        resultSet.getString("role"),
+                        resultSet.getString("mailcontact"),
+                        resultSet.getString("login"),
+                        resultSet.getString("password")
                 );
                 users.add(user);
             }
@@ -98,12 +88,12 @@ public class UserDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
                 return new User(
-                        resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getString(6)
+                        resultSet.getInt("id"),
+                        resultSet.getString("username"),
+                        resultSet.getString("role"),
+                        resultSet.getString("mailcontact"),
+                        resultSet.getString("login"),
+                        resultSet.getString("password")
                 );
             }
         } catch (SQLException | ClassNotFoundException e){

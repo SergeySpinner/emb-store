@@ -14,14 +14,6 @@ public class ProductDao {
     private static final String INSERT_SQL = "insert into \"Product\"(" + PRODUCT_FIELD + ") values(?,?,?,?)";
     private static final String DELETE_SQL = "delete from \"Product\" where id = ?";
 
-//    public static void main(String[] args) throws DaoException {
-//        Product product = new Product(null,"Shirt", 2200, 7, "Summer type");
-//        ProductDao productDao = new ProductDao();
-//        //product.setId(productDao.create(product));
-//        List<Product> products = productDao.findAll();
-//
-//    }
-
     public Integer create(Product product) throws DaoException{
         try(
                 Connection connection = PostgresUtils.getConnection();
@@ -68,11 +60,11 @@ public class ProductDao {
                 ){
             while (resultSet.next()){
                 products.add(new Product(
-                        resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getInt(3),
-                        resultSet.getInt(4),
-                        resultSet.getString(5)
+                        resultSet.getInt("id"),
+                        resultSet.getString("prodname"),
+                        resultSet.getInt("price"),
+                        resultSet.getInt("prodquantity"),
+                        resultSet.getString("prodinfo")
                 ));
             }
 
@@ -90,11 +82,12 @@ public class ProductDao {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
-                return new Product(resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getInt(3),
-                        resultSet.getInt(4),
-                        resultSet.getString(5));
+                return new Product(resultSet.getInt("id"),
+                        resultSet.getString("prodname"),
+                        resultSet.getInt("price"),
+                        resultSet.getInt("prodquantity"),
+                        resultSet.getString("prodinfo")
+                );
             }
         }catch (SQLException | ClassNotFoundException e){
             throw new DaoException();
