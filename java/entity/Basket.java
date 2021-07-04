@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Basket {
     private BasketState basketState;
-    private List<Product> basketList = new ArrayList<>();
+    private List<Product> basketList;
     private Integer priceOfBasket;
     private Integer buyerId;
 

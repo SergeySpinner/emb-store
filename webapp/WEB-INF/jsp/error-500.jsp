@@ -5,5 +5,6 @@
 </head>
 <body>
     <b>ERROR 500</b>
+    <button onclick="window.location.href='/HillelProject_war_exploded/emb-store/login';">Go to login page</button>
 </body>
 </html>

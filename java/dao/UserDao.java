@@ -14,6 +14,7 @@ public class UserDao {
     private static final String SELECT_ALL = "select " + USER_FIELD_FULL + " from \"User\"";
     private static final String SELECT_BY_ID = "select " + USER_FIELD_FULL + " from \"User\" where id = ?";
     private static final String SELECT_BY_USERNAME = "select " + USER_FIELD_FULL + " from \"User\" where login = ?";
+    private static final String SELECT_BY_EMAIL = "select " + USER_FIELD_FULL + " from \"User\" where mailcontact = ?";
     private static final String INSERT_SQL = "insert into \"User\"(" + USER_FIELD + ") values(?,?,?,?,?)";
     private static final String DELETE_SQL = "delete from \"User\" where id = ?";
 
@@ -109,6 +110,27 @@ public class UserDao {
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_USERNAME)
                 ){
             preparedStatement.setString(1, login);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                return new User(resultSet.getInt("id"),
+                        resultSet.getString("username"),
+                        resultSet.getString("role"),
+                        resultSet.getString("mailcontact"),
+                        resultSet.getString("login"),
+                        resultSet.getString("password"));
+            }
+            return null;
+        }catch (SQLException | ClassNotFoundException e){
+            throw new DaoException();
+        }
+    }
+
+    public User getByEmail(String email) throws DaoException{
+        try(
+                Connection connection = PostgresUtils.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_EMAIL)
+        ){
+            preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
                 return new User(resultSet.getInt("id"),

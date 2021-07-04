@@ -1,15 +1,23 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
-<head>
-    <title>Title</title>
-</head>
-<body>
-    <form method="post">
-        Login page<br>
-        <input type="text" name="login">
-        <input type="password" name="password">
-        <br>
-        <button value="Login" type="Submit">Login</button>
-    </form>
-</body>
+    <head>
+        <title>Login page</title>
+    </head>
+    <body>
+        <form method="post">
+            <p>Login page</p>
+            <p>Username
+            <input type="text" name="login" required></p>
+            <p>Password
+            <input type="password" name="password" required></p>
+            <br>
+            <br>
+            <button value="Sign in" type="Submit">Login</button>
+        </form>
+        <p>Don't have account yet?
+            <button onclick="window.location.href='/HillelProject_war_exploded/emb-store/registration';">
+                Create new account
+            </button>
+        </p>
+    </body>
 </html>

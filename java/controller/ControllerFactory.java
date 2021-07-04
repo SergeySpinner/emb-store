@@ -9,12 +9,18 @@ public class ControllerFactory {
     private Map<String, Controller> controllerMap = new HashMap<>();
 
     private void init() {
-        controllerMap.put("GET/profile", new ShowPageController("profile"));
+        controllerMap.put("GET/profile", new ProfileController());
         controllerMap.put("GET/login", new ShowPageController("login"));
         controllerMap.put("GET/main", new ShowPageController("main"));
         controllerMap.put("GET/client", new ShowPageController("login"));
+        controllerMap.put("GET/logout", new ShowPageController("logout"));
+
+        controllerMap.put("GET/shop-page", new ShopController());
 
         controllerMap.put("POST/login", new LoginController());
+
+        controllerMap.put("GET/registration", new ShowPageController("registration"));
+        controllerMap.put("POST/registration", new RegistrationController());
     }
 
     public Controller getController(HttpServletRequest request) {
