@@ -16,12 +16,8 @@ public class ProfileController implements Controller {
         Integer userId = (Integer) req.getSession().getAttribute("userId");
 
         User user = userService.getById(userId);
+        req.setAttribute("user", user);
+        return new ControllerResultDto("profile");
 
-
-        if (user != null) {
-            req.setAttribute("user", user);
-            return new ControllerResultDto("profile");
-        } else
-            return new ControllerResultDto("error-403");
     }
 }

@@ -4,8 +4,7 @@
 <head>
     <title>Title</title>
 </head>
-<body>
-<c:${req.getSession().setAttribute("userId",null)}/>
-<c:redirect url="/emb-store/login"/>
-</body>
+    <body>
+        <c:redirect url="/emb-store/login"/>
+    </body>
 </html>

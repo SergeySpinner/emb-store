@@ -13,7 +13,10 @@ public class ControllerFactory {
         controllerMap.put("GET/login", new ShowPageController("login"));
         controllerMap.put("GET/main", new ShowPageController("main"));
         controllerMap.put("GET/client", new ShowPageController("login"));
-        controllerMap.put("GET/logout", new ShowPageController("logout"));
+        controllerMap.put("GET/logout", new LogOutController());
+        controllerMap.put("GET/addToBasket", new AddBasketController());
+        controllerMap.put("GET/basket", new ShowBasketPageController());
+        controllerMap.put("GET/deleteBasketItem", new DeleteBasketItemController());
 
         controllerMap.put("GET/shop-page", new ShopController());
 

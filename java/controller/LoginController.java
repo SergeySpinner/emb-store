@@ -13,20 +13,17 @@ public class LoginController implements Controller {
 
     @Override
     public ControllerResultDto execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {
-        if(req.getSession().getAttribute("userId") == null) {
-            String login = req.getParameter("login");
-            String password = req.getParameter("password");
+        String login = req.getParameter("login");
+        String password = req.getParameter("password");
 
-            User user = userService.getByLogin(login);
+        User user = userService.getByLogin(login);
 
-            if (user.getPassword().equals(password)) {
-                req.setAttribute("user", user);
-                req.getSession().setAttribute("userId", user.getId());
-                req.getSession().setAttribute("req", req);
-                return new ControllerResultDto("profile");
-            } else {
-                return new ControllerResultDto("error-403");
-            }
-        } else return new ControllerResultDto("profile");
+        if (user.getPassword().equals(password)) {
+            req.setAttribute("user", user);
+            req.getSession().setAttribute("userId", user.getId());
+            return new ControllerResultDto("profile");
+        } else {
+            return new ControllerResultDto("error-403");
+        }
     }
 }

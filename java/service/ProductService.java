@@ -17,4 +17,12 @@ public class ProductService {
             throw new ServiceException();
         }
     }
+
+    public Product findById(Integer productId) throws ServiceException{
+        try{
+            return productDao.getById(productId);
+        }catch (DaoException e){
+            throw new ServiceException();
+        }
+    }
 }

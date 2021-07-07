@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class ShopController implements Controller{
+public class ShopController implements Controller {
 
     private ProductService productService = new ProductService();
 

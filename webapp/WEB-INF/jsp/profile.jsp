@@ -10,8 +10,10 @@
         <p>Id : ${user.id}</p>
         <p>Name : ${user.userName}</p>
         <p>Password : ${user.password}</p>
-        <br>
+
         <button onclick="window.location.href='/HillelProject_war_exploded/emb-store/shop-page';">Shop page</button>
+
+        <button onclick="window.location.href='/HillelProject_war_exploded/emb-store/basket';">Basket page</button>
 
         <button onclick="window.location.href='/HillelProject_war_exploded/emb-store/logout';">Log out</button>
     </body>

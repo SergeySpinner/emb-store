@@ -16,7 +16,7 @@ public class ProductDao {
     private static final String DELETE_SQL = "delete from \"Product\" where id = ?";
 
     public Integer create(Product product) throws DaoException {
-        try(
+        try (
                 Connection connection = PostgresUtils.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)
         ) {
@@ -29,37 +29,37 @@ public class ProductDao {
             Integer generatedKey = 0;
 
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 generatedKey = resultSet.getInt(1);
             }
 
             return generatedKey;
 
-        }catch (SQLException | ClassNotFoundException e){
+        } catch (SQLException | ClassNotFoundException e) {
             throw new DaoException();
         }
     }
 
-    public void delete(Product product) throws DaoException{
-        try(
+    public void delete(Product product) throws DaoException {
+        try (
                 Connection connection = PostgresUtils.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(DELETE_SQL)
-                ){
+        ) {
             preparedStatement.setInt(1, product.getId());
             preparedStatement.execute();
-        }catch (SQLException | ClassNotFoundException e){
+        } catch (SQLException | ClassNotFoundException e) {
             throw new DaoException();
         }
     }
 
-    public List<Product> findAll() throws DaoException{
+    public List<Product> findAll() throws DaoException {
         List<Product> products = new ArrayList<>();
-        try(
+        try (
                 Connection connection = PostgresUtils.getConnection();
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(SELECT_ALL)
-                ){
-            while (resultSet.next()){
+        ) {
+            while (resultSet.next()) {
                 products.add(new Product(
                         resultSet.getInt("id"),
                         resultSet.getString("prodname"),
@@ -69,20 +69,20 @@ public class ProductDao {
                 ));
             }
 
-        }catch (SQLException | ClassNotFoundException e){
+        } catch (SQLException | ClassNotFoundException e) {
             throw new DaoException();
         }
         return products;
     }
 
-    public Product getById(Integer id) throws DaoException{
-        try(
+    public Product getById(Integer id) throws DaoException {
+        try (
                 Connection connection = PostgresUtils.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID)
-                ){
+        ) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 return new Product(resultSet.getInt("id"),
                         resultSet.getString("prodname"),
                         resultSet.getInt("price"),
@@ -90,7 +90,7 @@ public class ProductDao {
                         resultSet.getString("prodinfo")
                 );
             }
-        }catch (SQLException | ClassNotFoundException e){
+        } catch (SQLException | ClassNotFoundException e) {
             throw new DaoException();
         }
         return null;
